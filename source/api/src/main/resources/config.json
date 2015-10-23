@@ -1,0 +1,10 @@
+{
+  "http":{
+    "host":"127.0.0.1",
+    "port":8080
+  },
+  "producer" : {
+    "metadata.broker.list": "192.168.4.99:9092",
+    "topic":"dop-msg"
+  }
+}

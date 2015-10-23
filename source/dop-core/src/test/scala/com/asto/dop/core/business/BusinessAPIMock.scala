@@ -1,0 +1,73 @@
+package com.asto.dop.core.business
+
+import com.asto.dop.core.helper.HttpHelper
+import io.vertx.core.http.HttpServerRequest
+import io.vertx.core.{Handler, Vertx}
+
+object BusinessAPIMock {
+
+  def start(): Unit = {
+    Vertx.vertx().createHttpServer().requestHandler(new Handler[HttpServerRequest] {
+      override def handle(request: HttpServerRequest): Unit = {
+        request.path() match {
+          case "/api/register/" if request.method().name() == "GET" =>
+            val start = request.params().get("start")
+            val end = request.params().get("end")
+            HttpHelper.returnContent(
+              """
+                |[
+                |{"id":"1","occur_time":"20151020121040","user_id":"user1","platform":"pc","amount":0.0},
+                |{"id":"2","occur_time":"20151020121040","user_id":"user2","platform":"mobile","amount":0.0},
+                |{"id":"3","occur_time":"20151020121040","user_id":"user3","platform":"pc","amount":0.0},
+                |{"id":"4","occur_time":"20151020121040","user_id":"user4","platform":"pc","amount":0.0},
+                |{"id":"5","occur_time":"20151020121040","user_id":"user5","platform":"pc","amount":0.0}
+                |]
+              """.stripMargin, request.response())
+          case "/api/bind/" if request.method().name() == "GET" =>
+            val start = request.params().get("start")
+            val end = request.params().get("end")
+            HttpHelper.returnContent(
+              """
+                |[
+                |{"id":"1","occur_time":"20151021121040","user_id":"user1","platform":"pc","amount":1000.1},
+                |{"id":"2","occur_time":"20151021121040","user_id":"user1","platform":"pc","amount":2000.1},
+                |{"id":"3","occur_time":"20151021121040","user_id":"user2","platform":"pc","amount":3000.1},
+                |{"id":"4","occur_time":"20151021121040","user_id":"user3","platform":"pc","amount":4000.1}
+                |]
+              """.stripMargin, request.response())
+          case "/api/apply/" if request.method().name() == "GET" =>
+            val start = request.params().get("start")
+            val end = request.params().get("end")
+            HttpHelper.returnContent(
+              """
+                |[
+                |{"id":"1","occur_time":"20151021121040","user_id":"user1","platform":"pc","amount":1000.1},
+                |{"id":"2","occur_time":"20151021121040","user_id":"user1","platform":"pc","amount":2000.1},
+                |{"id":"3","occur_time":"20151021121040","user_id":"user2","platform":"pc","amount":3000.1},
+                |{"id":"4","occur_time":"20151021121040","user_id":"user3","platform":"pc","amount":4000.1}
+                |]
+              """.stripMargin, request.response())
+          case "/api/self-examine-pass/" if request.method().name() == "GET" =>
+            val start = request.params().get("start")
+            val end = request.params().get("end")
+            HttpHelper.returnContent(
+              """
+                |[
+                |{"id":"1","occur_time":"20151022121040","user_id":"user1","platform":"pc","amount":100.1},
+                |{"id":"2","occur_time":"20151022121040","user_id":"user2","platform":"pc","amount":300.1}
+                |]
+              """.stripMargin, request.response())
+          case "/api/bank-examine-pass/" if request.method().name() == "GET" =>
+            val start = request.params().get("start")
+            val end = request.params().get("end")
+            HttpHelper.returnContent(
+              """
+                |[
+                |{"id":"1","occur_time":"20151023121040","user_id":"user1","platform":"pc","amount":10.1}
+                |]
+              """.stripMargin, request.response())
+        }
+      }
+    }).listen(8088)
+  }
+}
