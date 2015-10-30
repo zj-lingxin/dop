@@ -2,6 +2,7 @@ package com.asto.dop.core
 
 import com.asto.dop.core.entity.UserOptEntity
 import com.typesafe.scalalogging.slf4j.LazyLogging
+import io.vertx.core.Vertx
 import io.vertx.core.json.JsonObject
 
 /**
@@ -9,6 +10,7 @@ import io.vertx.core.json.JsonObject
  */
 object Global extends LazyLogging {
 
+  var vertx:Vertx=_
   //config.json数据
   var config: JsonObject = _
 

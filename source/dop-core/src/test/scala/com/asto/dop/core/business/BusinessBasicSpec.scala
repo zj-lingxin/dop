@@ -18,6 +18,7 @@ abstract class BusinessBasicSpec extends FunSuite with BeforeAndAfter with LazyL
 
   before {
     val config = new JsonObject(Source.fromFile(this.getClass.getResource("/").getPath + "config.json").mkString)
+    Global.vertx = Vertx.vertx()
     Global.config = config
     IP.enableFileWatch = true
     IP.load(this.getClass.getResource("/").getPath + "ip.dat")

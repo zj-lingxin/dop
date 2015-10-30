@@ -2,7 +2,6 @@ package com.asto.dop.core.business.collect
 
 import java.util.concurrent.CountDownLatch
 
-import com.asto.dop.core.Global
 import com.asto.dop.core.business.BusinessBasicSpec
 import com.asto.dop.core.entity.VisitEntity
 import com.asto.dop.core.module.collect._
@@ -131,10 +130,13 @@ class CollectProcessSpec extends BusinessBasicSpec {
   test("API Process Test") {
     val cdl = new CountDownLatch(1)
 
-    APIProcessor.process(Global.businessApi_apply._1)
-    APIProcessor.process(Global.businessApi_bind._1)
-    APIProcessor.process(Global.businessApi_selfExaminePass._1)
-    APIProcessor.process(Global.businessApi_bankExaminePass._1)
+    APIProcessor.processApply()
+    APIProcessor.processBind()
+    APIProcessor.processSelfExaminePass()
+    APIProcessor.processBankExaminePass()
+    /*APIProcessor.process(Global.businessApi_bind._1)
+     APIProcessor.process(Global.businessApi_selfExaminePass._1)
+     APIProcessor.process(Global.businessApi_bankExaminePass._1)*/
 
     cdl.await()
   }

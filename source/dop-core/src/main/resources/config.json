@@ -1,6 +1,6 @@
 {
   "http": {
-    "host": "127.0.0.1",
+    "host": "192.168.127.12",
     "port": 8080
   },
   "db": {
@@ -8,7 +8,7 @@
     "jdbc": "jdbc:mysql://192.168.4.99:3306/dop?characterEncoding=UTF-8",
     "userName": "root",
     "userPassword": "123456",
-    "max_pool_size": 20
+    "max_pool_size": 200
   },
   "binlog": {
     "host": "192.168.4.99",
@@ -18,24 +18,27 @@
     "monitorTables": "user,bind,apply"
   },
   "businessApi": {
-    "apply": {
-      "table": "apply",
-      "api": "http://127.0.0.1:8088/api/apply/"
+    "register": {
+      "api": "http://115.159.107.16:8081/statistics/register"
     },
     "bind": {
-      "table": "bind",
-      "api": "http://127.0.0.1:8088/api/self-examine-pass/"
+      "table": "property_shop",
+      "api": "http://115.159.107.16:8081/statistics/addshop"
+    },
+    "apply": {
+      "table": "loan_app",
+      "api": "http://115.159.107.16:8081/statistics/apply"
     },
     "self_examine_pass": {
-      "table": "apply",
-      "api": "http://127.0.0.1:8088/api/self-examine-pass/"
+      "table": "loan_app_audit_snap",
+      "api": "http://115.159.107.16:8081/statistics/selfexaminepass"
     },
     "bank_examine_pass": {
-      "table": "apply",
-      "api": "http://127.0.0.1:8088/api/bank-examine-pass/"
+      "table": "loan_app_audit_snap",
+      "api": "http://115.159.107.16:8081/statistics/bankexaminepass"
     }
   },
   "visitRecomputeAction": "login_success",
   "visitRegisterAction": "register_success",
-  "ip_path":"C:\\Users\\i\\OneDrive\\Work_Projects\\ProjectDeveloping\\dop\\source\\dop-core\\src\\main\\resources\\ip.dat"
+  "ip_path":"/data/work/myworkspace/dop/source/dop-core/src/main/resources/ip.dat"
 }

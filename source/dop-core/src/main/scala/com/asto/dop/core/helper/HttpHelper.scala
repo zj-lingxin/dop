@@ -51,7 +51,12 @@ object HttpHelper extends LazyLogging {
       }
     }).putHeader("content-type", contentType)
     if (body != null) {
-      client.end(JsonHelper.toJsonString(body))
+      contentType.toLowerCase match {
+        case c if c == "application/x-www-form-urlencoded" && body.isInstanceOf[Map[_, _]] =>
+          client.end(body.asInstanceOf[Map[String, String]].map(i => i._1 + "=" + i._2).mkString("&"))
+        case _ =>
+          client.end(JsonHelper.toJsonString(body))
+      }
     } else {
       client.end()
     }
@@ -64,6 +69,7 @@ object HttpHelper extends LazyLogging {
       case r: String => r
       case _ => JsonHelper.toJsonString(result)
     }
+    logger.trace("Response: \r\n" + res)
     response.setStatusCode(200).putHeader("Content-Type", contentType)
       .putHeader("Cache-Control", "no-cache")
       .putHeader("Access-Control-Allow-Origin", "*")

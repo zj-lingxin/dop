@@ -17,6 +17,7 @@
 
     <properties>
         <main.verticle>com.asto.dop.core.Startup</main.verticle>
+        <asciidoc.dir>${project.basedir}/doc</asciidoc.dir>
     </properties>
 
     <dependencies>
@@ -43,11 +44,42 @@
         </dependency>
     </dependencies>
 
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.asciidoctor</groupId>
+                <artifactId>asciidoctor-maven-plugin</artifactId>
+                <version>1.5.2</version>
+                <configuration>
+                    <sourceDirectory>doc</sourceDirectory>
+                    <outputDirectory>${project.build.directory}/docs</outputDirectory>
+                    <preserveDirectories>true</preserveDirectories>
+                    <relativeBaseDir>true</relativeBaseDir>
+                    <backend>html</backend>
+                    <doctype>book</doctype>
+                    <attributes>
+                        <maven-groupId>${project.groupId}</maven-groupId>
+                        <maven-artifactId>${project.artifactId}</maven-artifactId>
+                        <maven-version>${project.version}</maven-version>
+                    </attributes>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>process-asciidoc</goal>
+                        </goals>
+                        <phase>package</phase>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
     <repositories>
         <!--<repository>-->
-            <!--<id>asto</id>-->
-            <!--<name>Asto Repository</name>-->
-            <!--<url>http://192.168.6.6:8088/nexus/content/repositories/c9/</url>-->
+        <!--<id>asto</id>-->
+        <!--<name>Asto Repository</name>-->
+        <!--<url>http://192.168.6.6:8088/nexus/content/repositories/c9/</url>-->
         <!--</repository>-->
         <repository>
             <id>staging</id>
